@@ -1,0 +1,42 @@
+{% extends 'signup/baseTemplate.html' %}
+{% block content %}
+{% include 'blog/navbar.html' %}
+<div class="mt-5">
+  {% for message in messages %}
+  <h4>{{message}}</h4>
+  {% endfor %}
+</div>
+<div class="d-flex justify-content-center mt-5">
+    <div class="">
+        <h2 class="container">Post Blog</h2>
+        <hr>
+    <form class="row g-3" method="POST" action="{% url 'postBlog' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="col-12">
+          <label for="caption" class="form-label">First Name</label>
+          <textarea rows="4" class="form-control" name="caption" id="caption" placeholder="Caption here....."></textarea>
+        </div>
+        <div class="col-12 mt-3 mb-3">
+            <label for="formFile" class="form-label">Choose Photo</label>
+            <input class="form-control" type="file" name="img" id="formFile">
+          </div>
+        
+        
+        <!-- <div class="col-4">
+          <label for="inputState" class="form-label">State</label>
+          <select id="inputState" class="form-select">
+            <option selected>Choose...</option>
+            <option>...</option>
+          </select>
+        </div> -->
+        
+        <div class="offset-2 col-8">
+          <button type="submit" class="btn btn-primary w-25" style="margin-left: 37.5%;">Sign up</button>
+        </div>
+    </form>
+    
+    </div>
+</div>
+ 
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'signup/baseTemplate.html' %}
+{% block content %}
+    {% include 'blog/navbar.html' %}
+    <div class="container mt-4 w-50">  
+    list of Appointments
+    {% for appointment in appointments %}    
+    <div class="card text-dark bg-light mb-3" style="max-width: 550px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{doctor.profile_photo.url}}" class="img-fluid rounded-start" alt="">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{appointment.appointment.req_spec}} </h5>
+              <p class="card-text">{{appointment.appointment.doa}}</p>
+              <p class="card-text">{{appointment.appointment.sta}}</p>
+              <p class="card-text"><small class="text-muted"></small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+   
+
+    {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,55 @@
+    userType = request.session.get('signupUsername')
+    if request.method == 'POST':
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+        if password1 != password2:
+            messages.info(request, 'password confirmation failed')
+            return redirect('signupUser')
+
+        username = request.POST.get('username')
+        try:
+            user = User.objects.get(username=username)
+        except:
+            user = None
+            pass
+        email = request.POST.get('email')
+        #print(user)
+        #print(type(user))
+        if user is not None:
+            messages.info(request, 'enter diffrent username')
+            print('hello')
+            return redirect('signupUser')
+        userr = User.objects.create_user(username, email, password1)
+        auth_id = userr.id
+        print(userr.id)
+        #userr.save()
+        
+        #take id from auth table and insert it in doc/pat table along with its values
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        if userType == 'Doctor':
+            doc = Doctor(first_name=first_name, last_name=last_name, auth_id=userr)
+            doc.save()
+            usr_id = doc.id
+        elif userType == 'Patient':
+            patint = Patient(first_name=first_name, last_name=last_name, auth_id=userr)
+            patint.save()
+            usr_id = patint.id
+        address = request.POST.get('address')
+        city = request.POST.get('city')
+        state = request.POST.get('state')
+        phone = request.POST.get('phone')
+        pincode = request.POST.get('pincode')
+        if userType == 'Doctor':
+            doctorID = usr_id
+            patint = 0
+        elif userType == 'Patient':
+            doc = 0
+            patientID = usr_id
+        
+        addr = Address(phone=phone, address=address, city=city, state=state, pincode=pincode, doctorId=doc, patientId=patint, user=userType)
+        addr.save()
+
+    context = {
+        'userType' : 'userType'
+    }

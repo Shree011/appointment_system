@@ -1,0 +1,53 @@
+{% extends 'signup/baseTemplate.html' %}
+{% block content %}
+
+<div class="center">
+{%for message in messages%}
+    <h3>{{message}}</h3>
+{% endfor %}
+</div>
+<div class="d-flex justify-content-center mt-5">
+    <div class="">
+        <h2 class="container">Login Form</h2>
+        <hr>
+    <form class="row g-3" method="POST" action="{% url 'loginn' %}">
+        {% csrf_token %}
+        <div class="row mt-5">
+        <div class="offset-3 col-6">
+          <!-- <label for="inputAddress" class="form-label">Username</label> -->
+          <input type="text" class="form-control" name="username" id="inputAddress" placeholder="Username">
+        </div>
+        </div>
+        <div class="row mt-4">
+        <div class="offset-3 col-6">
+          <!-- <label for="password" class="form-label">Password</label> -->
+          <input type="text" class="form-control" name="password" id="password" placeholder="Password">
+        </div>
+        </div>
+        <div class="row mt-4">
+        <div class="offset-3 col-6">
+            <!-- <label for="inputState" class="form-label">User Type</label> -->
+            <select id="inputState" class="form-select" name="userType">
+              <option selected>Choose User</option> 
+              <option value="Doctor">Doctor</option>
+              <option value="Patient">Patient</option>
+            </select>
+        </div>
+        </div>
+        
+        <div class="offset-2 col-8">
+          <button type="submit" class="btn btn-primary w-25" style="margin-left: 37.5%;">Sign in</button>
+        </div>
+        <div class="text-center">Don't have an account?</div>
+        <div class="row">
+          
+        <div class="offset-2 col-8">
+           <a href="{% url 'signup' %}"  class="btn btn-primary w-25" style="margin-left: 37.5%;">Sign up</a>
+        </div>
+        </div>
+    </form>
+    
+    </div>
+</div>
+
+{% endblock %}

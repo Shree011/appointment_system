@@ -1,0 +1,18 @@
+{% extends 'signup/baseTemplate.html' %}
+{% load static %}
+{% block content %}
+{% include 'blog/navbar.html' %}
+
+{% for blog in blogs %}
+<div class="container mt-4 w-50">
+  <div class="card mb-3">
+    <img width="200px" height="500px" src="{{blog.img.url}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{blog.userId.first_name}}</h5>
+      <p class="card-text">{{blog.caption}}</p>
+      <p class="card-text"><small class="text-muted">{{blog.postDate}}</small></p>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}

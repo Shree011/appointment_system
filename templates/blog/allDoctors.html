@@ -1,0 +1,67 @@
+{% extends 'signup/baseTemplate.html' %}
+{% block content %}
+    {% include 'blog/navbar.html' %}
+    <div class="mt-5">
+      {% for message in messages %}
+      <h4>{{message}}</h4>
+      {% endfor %}
+    </div>
+    {% for doctor in doctors %}
+    <div class="container mt-4 w-50">    
+    <div class="card text-dark bg-light mb-3" style="max-width: 550px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{doctor.profile_photo.url}}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{doctor.user.first_name}} {{doctor.user.last_name}}</h5>
+              <p class="card-text">{{doctor.user}}</p>
+              <p class="card-text"><small class="text-muted"></small></p>
+              <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModal{{doctor.user}}">
+                Book Appointment
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal{{doctor.user}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Appointment</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="{% url 'appointment' %}">
+          {% csrf_token %}
+          <input name="username" id="username" hidden value="{{doctor.user}}">
+          <div class="offset-2 col-8 mt-4">
+            <!-- <label for="req_spec" class="form-label">First Name</label> -->
+            <input type="text" class="form-control" name="req_spec" id="req_spec" placeholder="Required Speciality">
+          </div>
+          <div class="offset-2 col-8 mt-4">
+            <!-- <label for="DOA" class="form-label">Last Name</label> -->
+            <input type="date" class="form-control" name="DOA" id="DOA" placeholder="Date of Appointment">
+          </div>
+          <div class="offset-2 col-8 mt-4">
+            <!-- <label for="STA" class="form-label">Username</label> -->
+            <input type="time" class="form-control" name="STA" id="STA" placeholder="Start Time Appointment">
+          </div>
+          <div class="offset-8 col-2 mt-4">
+            <input class="btn btn-primary" name="submit" type="submit" value="Confirm" >
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    {% endfor %}
+
+{% endblock %}
