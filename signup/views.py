@@ -35,7 +35,7 @@ def loginn(request):
                     return redirect('loginn')
                 return redirect('')
         else:
-            messages.info(request, 'wrong username password')
+            messages.info(request, 'Username or Password is incorrect !!')
             return redirect('loginn')
                 
     return render(request, 'signup/loginn.html')
