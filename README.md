@@ -1,5 +1,8 @@
 # hospital_appointment_system
 college mini project developed in Python Django framework
+
+Some sample work:
+
 ![Screenshot (64)](https://user-images.githubusercontent.com/89134802/180159878-7ef4f4b3-2eb4-4011-b75d-083b0ec410cc.png)
 ![Screenshot (65)](https://user-images.githubusercontent.com/89134802/180159951-e42e8529-7b5a-4740-b69e-6abf0c5a64b6.png)
 ![Screenshot (66)](https://user-images.githubusercontent.com/89134802/180159989-f47cbc55-a5ca-4af6-8d3a-31b27b2af0f1.png)
